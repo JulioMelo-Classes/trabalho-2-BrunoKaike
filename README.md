@@ -12,7 +12,7 @@ O Discord é um software gratuito de mensagens instantâneas que permite que as 
 
 ## Sobre o projeto
 <center>
-<img src="img/logo.png">
+<img src="img/logo (1).png">
 </center>
 
 O projeto KenoBot foi desenvolvido utilizando da linguagem C++ e do gerador de sistema de compilação Cmake.
