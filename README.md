@@ -10,6 +10,13 @@ Projeto desenvolvido e apresentado ao curso de Tecnologia da Informação da Uni
 
 O Discord é um software gratuito de mensagens instantâneas que permite que as pessoas conversem pela Internet . Ele foi originalmente criado para pessoas que jogam videogame , mas agora é usado por outras pessoas.
 
+## Sobre o projeto
+<center>
+<img src="img/logo.png">
+</center>
+
+O projeto KenoBot foi desenvolvido utilizando da linguagem C++ e do gerador de sistema de compilação Cmake.
+
 ## Para compilar
 
 Cmake:
