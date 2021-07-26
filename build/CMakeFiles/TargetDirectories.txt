@@ -1,3 +1,0 @@
-/home/runner/trabalho-2/projeto2/trabalho-2-BrunoKaike/build/CMakeFiles/rebuild_cache.dir
-/home/runner/trabalho-2/projeto2/trabalho-2-BrunoKaike/build/CMakeFiles/concordo.dir
-/home/runner/trabalho-2/projeto2/trabalho-2-BrunoKaike/build/CMakeFiles/edit_cache.dir
