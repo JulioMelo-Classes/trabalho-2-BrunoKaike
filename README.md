@@ -52,4 +52,4 @@ Teste 2 (Testes básicos)
 Bruno Kaike do Nascimento Batista -
 *<brunokaike@ufrn.edu.br>*
 
-Link do projeto: [https://github.com/JulioMelo-Classes/trabalho-1-BrunoKaike.git](https://github.com/JulioMelo-Classes/trabalho-1-BrunoKaike.git)
+Link do projeto: [https://github.com/JulioMelo-Classes/trabalho-2-BrunoKaike.git](https://github.com/JulioMelo-Classes/trabalho-1-BrunoKaike.git)
