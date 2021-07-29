@@ -3,6 +3,10 @@
 
 #include <string>
 
+/*
+CP1 classe servidor 70%
+tirei pontos pela implementação estar toda no .h
+*/
 class Usuario{
 	/*
 		TODO implementação dos atributos e métodos

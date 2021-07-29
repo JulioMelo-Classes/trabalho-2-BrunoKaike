@@ -19,13 +19,16 @@ string Sistema::quit() {
   return "Saindo...";
 }
 
+/*
+A1.2 ok
+*/
 string Sistema::create_user (const string email, const string senha, const string nome) {
 
   if(!this->check_duplicates_user(nome, email, senha)){
     
     if(this->usuarios.size()== 0){
 
-      this->usuarios.push_back(Usuario(0,"","",""));
+      this->usuarios.push_back(Usuario(0,"","","")); //isso não é necessário... vc poderia apenas criar o usuário com id 1 mesmo...
 
     }
 
@@ -43,6 +46,9 @@ string Sistema::create_user (const string email, const string senha, const strin
 
 }
 
+/*
+A1.3 ok
+*/
 string Sistema::login(const string email, const string senha) {
 
   int resposta = this->is_registered_user(email,senha);
@@ -59,6 +65,9 @@ string Sistema::login(const string email, const string senha) {
 
 }
 
+/*
+A2.1 ok
+*/
 string Sistema::disconnect(int id) {
 
   if(this->usuariosLogados.find(id) != this->usuariosLogados.end()){
@@ -78,6 +87,9 @@ string Sistema::disconnect(int id) {
   
 }
 
+/*
+A2.2 ok
+*/
 string Sistema::create_server(int id, const string nome) {
   
   if(this->usuariosLogados.find(id) != this->usuariosLogados.end()){
@@ -110,6 +122,9 @@ string Sistema::create_server(int id, const string nome) {
 
 }
 
+/*
+A2.3 ok
+*/
 string Sistema::set_server_desc(int id, const string nome, const string descricao) {
 
   if(this->usuariosLogados.find(id) != this->usuariosLogados.end()){
@@ -139,6 +154,9 @@ string Sistema::set_server_desc(int id, const string nome, const string descrica
 
 }
 
+/*
+A2.4 ok
+*/
 string Sistema::set_server_invite_code(int id, const string nome, const string codigo) {
 
   if(this->usuariosLogados.find(id) != this->usuariosLogados.end()){
@@ -177,6 +195,9 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 
 }
 
+/*
+A2.5 ok
+*/
 string Sistema::list_servers(int id) {
 
   if(this->usuariosLogados.find(id) != this->usuariosLogados.end()){
@@ -200,6 +221,10 @@ string Sistema::list_servers(int id) {
 
 }
 
+/*
+A2.6 ok
+Não vou tirar pontos, mas faltou atualizar a tabela de usuarios logados que possam estar no servidor!
+*/
 string Sistema::remove_server(int id, const string nome) {
   
   if(this->usuariosLogados.find(id) != this->usuariosLogados.end()){
