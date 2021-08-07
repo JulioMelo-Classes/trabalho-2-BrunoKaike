@@ -19,19 +19,19 @@ Preencha os dados abaixo para identificar a autoria do trabalho.
   - [x] Setar código de convite para o servidor
   - [x] Listar servidores
   - [x] Remover servidor
-  - [ ] Entrar em um servidor
-  - [ ] Sair do servidor
-  - [ ] Listar pessoas no servidor
+  - [x] Entrar em um servidor
+  - [x] Sair do servidor
+  - [x] Listar pessoas no servidor
 
 - Interações básicas com servidores(estando logado)
-  - [ ] Listar canais do servidor
-  - [ ] Criar um canal do servidor 
-  - [ ] Entrar em um canal
-  - [ ] Sair um canal
+  - [x] Listar canais do servidor
+  - [x] Criar um canal do servidor 
+  - [x] Entrar em um canal
+  - [x] Sair um canal
 
 - Gestão de mensagens (se tiver entrado no servidor e em algum canal)
-  - [ ] Enviar mensagem para o canal
-  - [ ] Visualizar mensagens do canal:
+  - [x] Enviar mensagem para o canal
+  - [x] Visualizar mensagens do canal:
 
 
 --------
