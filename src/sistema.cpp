@@ -5,11 +5,10 @@
 #include <vector>
 #include <iterator>
 #include <map>
+#include <stdio.h>
+#include <time.h>
 
 using namespace std;
-
-#include "../include/usuario.h"
-#include "../include/servidor.h"
 
 /* DADOS */
 
@@ -22,22 +21,15 @@ string Sistema::quit() {
 string Sistema::create_user (const string email, const string senha, const string nome) {
 
   if(!this->check_duplicates_user(nome, email, senha)){
-    
-    if(this->usuarios.size()== 0){
 
-      this->usuarios.push_back(Usuario(0,"","",""));
-
-    }
-
-    Usuario new_user(nextUserId, nome, email, senha);
-    this->usuarios.push_back(new_user);
+    this->usuarios.push_back(Usuario(nextUserId, nome, email, senha));
     nextUserId++;
 
     return "Usuário criado";
 
   } else {
 
-    return "Usuário já existe!";
+    return "\033[1;31mUsuário já existe!\033[0m";
 
   }
 
@@ -46,14 +38,14 @@ string Sistema::create_user (const string email, const string senha, const strin
 string Sistema::login(const string email, const string senha) {
 
   int resposta = this->is_registered_user(email,senha);
-  if(resposta != 0){
+  if(resposta != -1){
 
     this->usuariosLogados[this->usuarios[resposta].getId()] = std::make_pair("", "");
     return "Logado como " + email;
 
   } else {
 
-    return "Senha ou usuário inválidos!";
+    return "\033[1;31mSenha ou usuário inválidos!\033[0m";
 
   }
 
@@ -72,7 +64,7 @@ string Sistema::disconnect(int id) {
 
   } else {
 
-    return "Usuário não está conectado";
+    return "\033[1;31mUsuário não está conectado\033[0m";
 
   }
   
@@ -82,29 +74,22 @@ string Sistema::create_server(int id, const string nome) {
   
   if(this->usuariosLogados.find(id) != this->usuariosLogados.end()){
 
-    if(!this->check_duplicates_server(nome)){
+    if(this->check_duplicates_server(nome)<0){
 
-      if(this->servidores.size()== 0){
-
-        this->servidores.push_back(Servidor(0,""));
-
-      }
-
-      Servidor new_server(id, nome);
-      this->servidores.push_back(new_server);
+      this->servidores.push_back(Servidor(id, nome));
       this->usuariosLogados[id] = std::make_pair(nome, "");
-
+      this->servidores[this->servidores.size()-1].addParticipantesId(id);
       return "Servidor criado";
 
     } else {
-
-      return "Servidor com esse nome já existe";
+      
+      return "\033[1;31mServidor com esse nome já existe\033[0m";
 
     }
 
   } else {
 
-      return "Usuário não está conectado";
+      return "\033[1;31mUsuário não está conectado\033[0m";
 
   }
 
@@ -116,24 +101,24 @@ string Sistema::set_server_desc(int id, const string nome, const string descrica
 
     int resposta = this->is_registered_server(id,nome);
 
-    if(resposta > 0){
+    if(resposta >= 0){
 
       this->servidores[resposta].setDescricao(descricao);
       return "Descrição do servidor \""+ nome +"\" modificada!";
 
-    } else if(resposta == 0) {
+    } else if(resposta == -2) {
 
-      return "Servidor \""+ nome +"\" não existe";
+      return "\033[1;31mServidor \""+ nome +"\" não existe\033[0m";
 
     } else if(resposta == -1){
-
-      return "Você não pode alterar a descrição de um servidor que não foi criado por você";
+      
+      return "\033[1;31mVocê não pode alterar a descrição de um servidor que não foi criado por você\033[0m";
 
     }
 
   } else {
 
-    return "Usuário não está conectado";
+    return "\033[1;31mUsuário não está conectado\033[0m";
 
   }
 
@@ -145,7 +130,7 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 
     int resposta = this->is_registered_server(id,nome);
 
-    if(resposta > 0){
+    if(resposta >= 0){
 
       if(codigo!=""){
 
@@ -161,17 +146,17 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 
     } else if(resposta == 0) {
 
-      return "Servidor \""+ nome +"\" não existe";
+      return "\033[1;31mServidor \""+ nome +"\" não existe\033[0m";
 
     } else if(resposta == -1){
 
-      return "Você não pode alterar o código de convite de um servidor que não foi criado por você";
+      return "\033[1;31mVocê não pode alterar o código de convite de um servidor que não foi criado por você\033[0m";
 
     }
 
   } else {
 
-    return "Usuário não está conectado";
+    return "\033[1;31mUsuário não está conectado\033[0m";
 
   }
 
@@ -180,21 +165,21 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 string Sistema::list_servers(int id) {
 
   if(this->usuariosLogados.find(id) != this->usuariosLogados.end()){
-    string saida = this->list_servers_by_id_owner(id);
+      string saida = this->list_servers_by_id_owner(id);
 
-    if(!saida.empty()){
+      if(!saida.empty()){
 
-      return saida;
-    
-    } else {
+        return saida;
+      
+      } else {
 
-      return "Nenhum servidor foi encontrado!";
+        return "\033[1;31mNenhum servidor foi encontrado\033[0m";
 
-    }
+      }
 
   } else {
     
-    return "Usuário não está conectado";
+    return "\033[1;31mUsuário não está conectado\033[0m";
 
   }
 
@@ -206,72 +191,371 @@ string Sistema::remove_server(int id, const string nome) {
 
     int resposta = this->is_registered_server(id, nome);
 
-    if(resposta > 0){
+    if(resposta >= 0){
 
       this->remove_users_from_server_view(nome);
       this->servidores.erase(servidores.begin() + resposta);
       return "Servidor \""+ nome +"\" removido";
 
-    } else if(resposta == 0){
-
-      return "Servidor \""+ nome +"\" não encontrado";
+    } else if(resposta == -1){
+      return "\033[1;31mVocê não é o dono do servidor \"" + nome + "\"\033[0m";
 
     } else {
 
-      return "Você não é o dono do servidor \"" + nome + "\"";
+      return "\033[1;31mServidor \""+ nome +"\" não encontrado\033[0m";
 
     }
 
   } else {
 
-    return "Usuário não está conectado";
+    return "\033[1;31mUsuário não está conectado\033[0m";
 
   }
   
-  return "remove_server NÃO IMPLEMENTADO";
 }
 
 string Sistema::enter_server(int id, const string nome, const string codigo) {
-  return "enter_server NÃO IMPLEMENTADO";
+  
+  auto find = this->usuariosLogados.find(id);
+  if(find != this->usuariosLogados.end()){
+
+    int resposta = this->check_duplicates_server(nome);
+
+    if(resposta >= 0){
+      
+      string codigoS = this->servidores[resposta].getCodigoConvite();
+
+      if(codigoS == ""){
+
+        usuariosLogados[find->first] = std::make_pair(nome,"");
+
+        if(this->servidores[resposta].check_duplicates_participant(id) < 0){
+
+          this->servidores[resposta].addParticipantesId(id);
+
+        }
+
+        return "Entrou no servidor com sucesso";
+
+      } else {
+
+        if(codigoS == codigo){
+          
+          usuariosLogados[find->first] = std::make_pair(nome,"");
+
+          if(this->servidores[resposta].check_duplicates_participant(id) < 0){
+
+            this->servidores[resposta].addParticipantesId(id);
+
+          }
+
+          return "Entrou no servidor com sucesso";
+
+        } else if(codigo == ""){
+
+          if(this->servidores[resposta].getUsuarioDonoId()==id){
+
+            usuariosLogados[find->first] = std::make_pair(nome,"");
+            if(this->servidores[resposta].check_duplicates_participant(id) < 0){
+
+              this->servidores[resposta].addParticipantesId(id);
+
+            }
+            
+            return "Entrou no servidor com sucesso";
+
+          } else {
+
+            return "\033[1;31mServidor requer código de convite\033[0m";
+
+          }
+          
+        } else {
+
+          return "\033[1;31mCódigo inválido\033[0m";
+
+        }
+
+      }
+
+    } else if(resposta == -2) {
+
+      return "\033[1;31mServidor \""+ nome +"\" não existe\033[0m";
+
+    }
+
+  } else {
+
+    return "\033[1;31mUsuário não está conectado\033[0m";
+
+  }
+
 }
 
 string Sistema::leave_server(int id, const string nome) {
-  return "leave_server NÃO IMPLEMENTADO";
+  
+  auto find = this->usuariosLogados.find(id);
+
+  if(find != this->usuariosLogados.end()){
+
+    int server = check_duplicates_server(nome);
+
+    if(userOnAServer(id)==-1){
+
+      return "\033[1;31mVocê não está em qualquer servidor\033[0m";
+
+    } else if(server < 0) {
+
+      return "\033[1;31mServidor não existe!\033[0m";
+
+    } else if(server >= 0 && find->second.first != nome){
+
+      return "\033[1;31mUsuário não está conectado no servidor informado\033[0m";
+    
+    } else if(server >= 0 && find->second.first == nome){
+
+      this->usuariosLogados[find->first] = std::make_pair("","");
+      this->servidores[server].remove_participant(id);
+      return "Saindo do servidor \""+nome+"\"";
+
+    }
+
+  } else {
+
+    return "\033[1;31mUsuário não está conectado\033[0m";
+
+  }
+
 }
 
 string Sistema::list_participants(int id) {
-  return "list_participants NÃO IMPLEMENTADO";
+
+  auto find = this->usuariosLogados.find(id);
+
+  if(find != this->usuariosLogados.end()){
+
+    int server = check_duplicates_server(find->second.first);
+
+    if(server >= 0){
+      
+      return this->servidores[server].allParticipantsToString(this->usuarios);
+
+    } else {
+
+      return "\033[1;31mUsuário não está visualizando nenhum servidor!\033[0m";
+
+    }
+
+  } else {
+
+    return "\033[1;31mUsuário não está conectado\033[0m";
+
+  }
+
 }
 
 string Sistema::list_channels(int id) {
-  return "list_channels NÃO IMPLEMENTADO";
+
+  if(this->list_channels_by_id_viewer(id) != ""){
+    return this->list_channels_by_id_viewer(id);
+  } else {
+
+    return "O servidor visualizado não possui canais de texto!";
+
+  }
+  
 }
 
 string Sistema::create_channel(int id, const string nome) {
-  return "create_channel NÃO IMPLEMENTADO";
+
+  auto find = this->usuariosLogados.find(id);
+
+  if(find != this->usuariosLogados.end()){
+
+    int server = check_duplicates_server(find->second.first);
+
+    if(server >= 0){
+      if(this->servidores[server].check_duplicates_chanel(nome) < 0){
+
+        this->servidores[server].addCanaisTexto(CanalTexto(nome));
+        this->usuariosLogados[find->first] = std::make_pair(find->second.first,nome);
+        return "Canal de texto \"" + nome + "\" criado";
+
+      } else {
+        
+        return "\033[1;31mCanal de texto \"" + nome + "\" já existe!\033[0m";
+
+      }
+
+    } else {
+
+      return "\033[1;31mUsuário não está visualizando nenhum servidor!\033[0m";
+
+    }
+
+  } else {
+
+    return "\033[1;31mUsuário não está conectado\033[0m";
+
+  }
+
 }
 
 string Sistema::enter_channel(int id, const string nome) {
-  return "enter_channel NÃO IMPLEMENTADO";
+  auto find = this->usuariosLogados.find(id);
+
+  if(find != this->usuariosLogados.end()){
+
+    int server = check_duplicates_server(find->second.first);
+
+    if(server >= 0){
+      if(this->servidores[server].check_duplicates_chanel(nome) >= 0){
+
+        this->usuariosLogados[find->first] = std::make_pair(find->second.first,nome);
+        return "Entrou no canal de texto \"" + nome + "\"";
+
+      } else {
+        
+        return "\033[1;31mCanal \"" + nome + "\" não existe!\033[0m";
+
+      }
+
+    } else {
+
+      return "\033[1;31mUsuário não está visualizando nenhum servidor!\033[0m";
+
+    }
+
+  } else {
+
+    return "\033[1;31mUsuário não está conectado\033[0m";
+
+  }
+
 }
 
 string Sistema::leave_channel(int id) {
-  return "leave_channel NÃO IMPLEMENTADO";
+
+  auto find = this->usuariosLogados.find(id);
+
+  if(find != this->usuariosLogados.end()){
+
+    int server = check_duplicates_server(find->second.first);
+
+    if(server >= 0){
+
+      if(this->servidores[server].check_duplicates_chanel(find->second.second) >= 0){
+
+          this->usuariosLogados[find->first] = std::make_pair(find->second.first,"");
+          return "Saindo do canal";
+
+      } else {
+
+          return "\033[1;31mUsuário não está visualizando nenhum canal!\033[0m";
+
+      }
+
+    } else {
+
+      return "\033[1;31mUsuário não está visualizando nenhum servidor!\033[0m";
+
+    }
+
+  } else {
+
+    return "\033[1;31mUsuário não está conectado\033[0m";
+
+  }
+
 }
 
 string Sistema::send_message(int id, const string mensagem) {
-  return "send_message NÃO IMPLEMENTADO";
+
+  auto find = this->usuariosLogados.find(id);
+
+  if(find != this->usuariosLogados.end()){
+
+    int server = check_duplicates_server(find->second.first);
+
+    if(server >= 0){
+
+      int chanel = this->servidores[server].check_duplicates_chanel(find->second.second);
+      if(chanel >= 0){
+
+          std::string data = this->currentDateTime();
+          this->servidores[server].addMensagens(chanel, Mensagem(data, id, mensagem));
+          return "Mensagem enviada!";
+
+      } else {
+
+          return "\033[1;31mUsuário não está visualizando nenhum canal!\033[0m";
+
+      }
+
+    } else {
+
+      return "\033[1;31mUsuário não está visualizando nenhum servidor!\033[0m";
+
+    }
+
+  } else {
+
+    return "\033[1;31mUsuário não está conectado\033[0m";
+
+  }
+  
 }
 
 string Sistema::list_messages(int id) {
-  return "list_messages NÃO IMPLEMENTADO";
+
+  auto find = this->usuariosLogados.find(id);
+
+  if(find != this->usuariosLogados.end()){
+
+    int server = check_duplicates_server(find->second.first);
+
+    if(server >= 0){
+
+      int chanel = this->servidores[server].check_duplicates_chanel(find->second.second);
+      if(chanel >= 0){
+
+          std::string saida = this->servidores[server].allMessagesToString(this->usuarios, chanel);
+
+          if(saida != ""){
+
+            return saida;
+
+          } else {
+
+            return "Sem mensagens para exibir";
+
+          }
+
+      } else {
+
+          return "\033[1;31mUsuário não está visualizando nenhum canal!\033[0m";
+
+      }
+
+    } else {
+
+      return "\033[1;31mUsuário não está visualizando nenhum servidor!\033[0m";
+
+    }
+
+  } else {
+
+    return "\033[1;31mUsuário não está conectado\033[0m";
+
+  }
+
 }
 
 /* IMPLEMENTAR MÉTODOS PARA OS COMANDOS RESTANTES */
 
 int Sistema::is_registered_server(int id, const std::string nome){
 
-  for(int x = 1; x < this->servidores.size(); x++){
+  for(int x = 0; x < this->servidores.size(); x++){
     
     if(this->servidores[x].getUsuarioDonoId()==id && this->servidores[x].getNome()==nome){
       return x;
@@ -284,13 +568,13 @@ int Sistema::is_registered_server(int id, const std::string nome){
 
   }
 
-  return 0;
+  return -2;
 
 }
 
 int Sistema::is_registered_user_id(int id){
 
-  for(int x = 1; x < this->usuarios.size(); x++){
+  for(int x = 0; x < this->usuarios.size(); x++){
     
     if(this->usuarios[x].getId()==id){
       return x;
@@ -299,13 +583,13 @@ int Sistema::is_registered_user_id(int id){
 
   }
 
-  return 0;
+  return -1;
 
 }
 
 int Sistema::is_registered_user(const string email, const string senha){
 
-  for(int x = 1; x < this->usuarios.size(); x++){
+  for(int x = 0; x < this->usuarios.size(); x++){
 
     if(this->usuarios[x].getEmail()==email && this->usuarios[x].getSenha()==senha){
       return x;
@@ -314,13 +598,13 @@ int Sistema::is_registered_user(const string email, const string senha){
 
   }
 
-  return 0;
+  return -1;
 
 }
 
 bool Sistema::check_duplicates_user(const std::string nome, const std::string email, const std::string senha){
 
-  for(int x = 1; x < this->usuarios.size(); x++){
+  for(int x = 0; x < this->usuarios.size(); x++){
 
     if(this->usuarios[x].getNome()==nome && this->usuarios[x].getEmail()==email && this->usuarios[x].getSenha()==senha){
 
@@ -334,19 +618,19 @@ bool Sistema::check_duplicates_user(const std::string nome, const std::string em
 
 }
 
-bool Sistema::check_duplicates_server(const std::string nome){
+int Sistema::check_duplicates_server(const std::string nome){
 
   for(int x = 0; x < this->servidores.size(); x++){
 
     if(this->servidores[x].getNome()==nome){
 
-      return true;
+      return x;
 
     }
 
   }
 
-  return false;
+  return -1;
 
 }
 
@@ -354,11 +638,11 @@ string Sistema::list_servers_by_id_owner(int id){
 
   string saida;
 
-  for(int x = 1; x < this->servidores.size(); x++){
+  for(int x = 0; x < this->servidores.size(); x++){
     
     if(this->servidores[x].getUsuarioDonoId()==id){
       
-      if(x==1){
+      if(x==0){
         saida+= this->servidores[x].getNome();
       } else {
         
@@ -389,4 +673,51 @@ void Sistema::remove_users_from_server_view(string nome){
 
   }
 
+}
+
+string Sistema::list_channels_by_id_viewer(int id){
+
+  auto find = this->usuariosLogados.find(id);
+
+  string saida;
+
+  for(int x = 0; x < this->servidores.size(); x++){
+    
+    if(this->servidores[x].getNome() == find->second.first){
+      
+      int servidor = this->check_duplicates_server(find->second.first);
+      
+      return servidores[servidor].allChannelsToString();
+      
+    }
+
+  }
+
+  return "Servidor não encontrado";
+
+}
+
+int Sistema::userOnAServer(int id){
+
+  for(int x = 0; x < this->servidores.size(); x++){
+
+    return this->servidores[x].check_duplicates_participant(id);
+
+    }
+
+  return -1;
+
+}
+
+string Sistema::currentDateTime() {
+    setlocale(LC_ALL,NULL);
+
+    time_t now = time(0);
+    struct tm tstruct;
+    char buf[80];
+    tstruct = *localtime(&now);
+    
+    strftime(buf, sizeof(buf), "<%Y-%m-%d - %X>", &tstruct);
+
+    return buf;
 }
