@@ -25,16 +25,26 @@ class Sistema {
 		*/
 		std::string quit();
 
+    /*! Cria e formata uma string contendo a data e hora atual
+				@return uma string contendo a data e hora atual de acordo com o TimeZone doa máquina.
+		*/
+    std::string currentDateTime();
+
+    /*! Verifica se um determinado usuário está participando de algum servidor e retorna sua posição no vetor de usuários.
+				@param id o id do usuário informado no comando leave-server.
+				@return um int com a posição do usuário encontrado no vetor, sendo -1 um valor que representa que o usuário não está participando de nenhum servidor.
+		*/
+    int userOnAServer(int id);
+
+    /*! Retorna uma string contendo todos os canais de texto de um servidor que está sendo visualizado por um determinado usuário.
+				@param id o id do usuário informado no comando list-channels.
+				@return uma string contendo todos os canais de texto encontrados no servidor.
+		*/
+    std::string list_channels_by_id_viewer(int id);
+
     /*! Remove o estado de visualização dos usuários que estão visualizando um servidor que irá ser removido
 				@param nome o nome do servidor informado no comando remove-server.
 		*/
-
-    std::string currentDateTime();
-
-    int userOnAServer(int id);
-
-    std::string list_channels_by_id_viewer(int id);
-
     void remove_users_from_server_view(std::string nome);
 
     /*! Verifica se um determinado id de dono correspondem a algum servidor retornando o nome de todos os servidores encontrados.
@@ -46,20 +56,20 @@ class Sistema {
     /*! Verifica se um determinado id de dono e nome correspondem a algum servidor cadastrado retornando true/false.
 				@param idDono o id do dono informado no comando set-server-desc.
 				@param nome o nome do servidor passado ao comando set-server-desc.
-				@return um int com a posição do servidor encontrado no vetor, sendo 0 um valor que representa servidor não encontrado e -1 que o id fornecido não é dono do servidor.
+				@return um int com a posição do servidor encontrado no vetor, sendo -2 um valor que representa servidor não encontrado e -1 que o id fornecido não é dono do servidor.
 		*/
     int is_registered_user_id(int id);
 
     /*! Verifica se um determinado id corresponde a algum usuario cadastrado e retorna a posição do usuário no vetor usuarios.
 				@param id o id do usuário informado no comando disconnect.
-				@return um int com a posição do usuário encontrado no vetor, sendo 0 um valor inválido.
+				@return um int com a posição do usuário encontrado no vetor, sendo -1 um valor inválido.
 		*/
     int is_registered_server(int id, const std::string nome);
 
     /*! Verifica se um determinado email e senha correspondem a alguma conta cadastrada retornando a posição do usuário no vetor usuarios
 				@param email o email do usuário informado no comando login.
 				@param senha a senha passada ao comando login.
-				@return um int com a posição do usuário encontrado no vetor, sendo 0 um valor inválido.
+				@return um int com a posição do usuário encontrado no vetor, sendo -1 um valor inválido.
 		*/
     int is_registered_user(const std::string email, const std::string senha);
 
@@ -81,7 +91,7 @@ class Sistema {
 				@param email o email do usuário informado no comando create-user.
 				@param senha a senha passada ao comando create-ser
 				@param nome o nome do usuário (com espaços) passado ao comando create user.
-				@return um int com a posição do servidor encontrado no vetor, sendo 0 e -1 um valor inválido.
+				@return um int com a posição do servidor encontrado no vetor, sendo -1 um valor inválido.
 		*/
 		std::string create_user (const std::string email, const std::string senha, const std::string nome);
 
