@@ -1,0 +1,8 @@
+create-user julio.melo@imd.ufrn.br 12ab34cd Julio Melo
+login julio.melo@imd.ufrn.br 12ab34cd
+create-server 1 minha-casa
+create-user intruso@imd.ufrn.br 12ab34cd Intruso
+login intruso@imd.ufrn.br 12ab34cd
+enter-server 2 minha-casa
+remove-server 2 minha-casa
+quit

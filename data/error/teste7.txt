@@ -1,0 +1,7 @@
+create-user julio.melo@imd.ufrn.br 12ab34cd Julio Melo
+login julio.melo@imd.ufrn.br 12ab34cd
+create-server 1 minha-casa
+create-user bruno@imd.ufrn.br 12ab34dc Bruno Kaike
+login bruno@imd.ufrn.br 12ab34dc
+set-server-desc 2 minha-casa "Este servidor serve como minha casa, sempre estarei nele"
+quit
