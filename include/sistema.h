@@ -28,6 +28,13 @@ class Sistema {
     /*! Remove o estado de visualização dos usuários que estão visualizando um servidor que irá ser removido
 				@param nome o nome do servidor informado no comando remove-server.
 		*/
+
+    std::string currentDateTime();
+
+    int userOnAServer(int id);
+
+    std::string list_channels_by_id_viewer(int id);
+
     void remove_users_from_server_view(std::string nome);
 
     /*! Verifica se um determinado id de dono correspondem a algum servidor retornando o nome de todos os servidores encontrados.
@@ -68,13 +75,13 @@ class Sistema {
 				@param nome o nome do servidor dado no comando create-server.
 				@return um booleano contendo true se foi encontrado cópias.
 		*/
-    bool check_duplicates_server(const std::string nome);
+    int check_duplicates_server(const std::string nome);
 
 		/*! Cria um usuário e retorna uma string de erro/sucesso 
 				@param email o email do usuário informado no comando create-user.
 				@param senha a senha passada ao comando create-ser
 				@param nome o nome do usuário (com espaços) passado ao comando create user.
-				@return uma string contendo uma mensagem de erro ou "Usuário Criado".
+				@return um int com a posição do servidor encontrado no vetor, sendo 0 e -1 um valor inválido.
 		*/
 		std::string create_user (const std::string email, const std::string senha, const std::string nome);
 

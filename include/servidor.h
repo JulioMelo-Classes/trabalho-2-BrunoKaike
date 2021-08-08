@@ -2,6 +2,7 @@
 #define SERVIDOR_H
 
 #include "../include/canaltexto.h"
+#include "../include/usuario.h"
 
 class Servidor{
 	/*
@@ -20,60 +21,48 @@ class Servidor{
 
     //Constructor
 
-    Servidor(int usuarioDonoId, std::string nome){
-
-      this->usuarioDonoId = usuarioDonoId;
-      this->nome = nome;
-
-    }
+    Servidor(int usuarioDonoId, std::string nome);
 
     //Setters
 
-    void setDescricao(std::string descricao){
+    void setDescricao(std::string descricao);
 
-      this->descricao = descricao;
-
-    }
-
-    void setCodigoConvite(std::string codigoConvite){
-
-      this->codigoConvite = codigoConvite;
-
-    }
+    void setCodigoConvite(std::string codigoConvite);
 
     //adders
 
-    void addCanaisTexto(CanalTexto c){
-      
-      this->canaisTexto.push_back(c);
+    void addCanaisTexto(CanalTexto c);
 
-    }
-
-    void addParticipantesId(int id){
-      
-      this->participantesIDs.push_back(id);
-
-    }
+    void addParticipantesId(int id);
 
     //getters
 
-    int getUsuarioDonoId(){
+    int getUsuarioDonoId();
 
-      return this->usuarioDonoId;
+    std::string getNome();
 
-    }
+    std::string getDescricao();
 
-    std::string getNome(){
+    std::string getCodigoConvite();
 
-      return this->nome;
+    // operations
 
-    }
+    int check_duplicates_chanel(std::string);
 
-    std::string getDescricao(){
+    int check_duplicates_participant(int id);
 
-      return this->descricao;
+    void remove_participant(int id);
 
-    }
+    void addMensagens(int id, Mensagem s);
+
+    //toStrings
+
+    std::string allParticipantsToString(std::vector<Usuario> users);
+    
+    std::string allChannelsToString();
+
+    std::string allMessagesToString(std::vector<Usuario> users, int chanel);
+    
 
 };
 

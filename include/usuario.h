@@ -18,36 +18,17 @@ class Usuario{
 
     //Constructor
 
-    Usuario(int id, std::string nome, std::string email, std::string senha){
-      this->id = id;
-      this->nome = nome;
-      this->email = email;
-      this->senha = senha;
-
-    }
+    Usuario(int id, std::string nome, std::string email, std::string senha);
 
     // Getters
     
-    std::string getNome(){
+    std::string getNome();
 
-      return this->nome;
-    }
+    std::string getEmail();
 
-    std::string getEmail(){
+    std::string getSenha();
 
-      return this->email;
-    }
-
-    std::string getSenha(){
-
-      return this->senha;
-    }
-
-    int getId(){
-
-      return this->id;
-
-    }
+    int getId();
 
 };
 

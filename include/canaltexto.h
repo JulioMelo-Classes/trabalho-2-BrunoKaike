@@ -1,7 +1,11 @@
 #ifndef CANALTEXTO_H
 #define CANALTEXTO_H
 
+#include <vector>
+#include <string>
+
 #include "../include/mensagem.h"
+#include "../include/usuario.h"
 
 class CanalTexto{
 	/*
@@ -16,20 +20,17 @@ class CanalTexto{
 
     //Constructor
 
-    CanalTexto(std::string nome){
-
-      this->nome = nome;
-
-    }
+    CanalTexto(std::string nome);
 
     //Adder
 
-    void addMensagens(Mensagem m){
+    void addMensagens(Mensagem m);
 
-      this->mensagens.push_back(m);
+    //Getter
+    std::string getNome(void) const;
 
-    }
-
+    //ToString
+    std::string messagesToString(std::vector<Usuario> users);
 
 };
 

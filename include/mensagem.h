@@ -1,6 +1,8 @@
 #ifndef MENSAGEM_H
 #define MENSAGEM_H
 
+#include <string>
+
 class Mensagem{
 	/*
 		TODO implementação dos atributos e métodos
@@ -15,13 +17,14 @@ class Mensagem{
 
     //Constructor
     
-    Mensagem(std::string dataHora, int enviadaPor, std::string conteudo){
+    Mensagem(std::string dataHora, int enviadaPor, std::string conteudo);
 
-      this->dataHora = dataHora;
-      this->enviadaPor = enviadaPor;
-      this->conteudo = conteudo;
+    //Getter
+    int getEnviadoPor();
 
-    }
+    std::string getData();
+
+    std::string getConteudo();
 
 };
 
