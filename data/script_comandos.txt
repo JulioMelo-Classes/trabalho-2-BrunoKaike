@@ -1,4 +1,4 @@
-create-user isaacfranco@imd.ufrn.br senhalegal Isaac Franco Fernandes 
+create-user isaacfranco@imd.ufrn.br senhalegal Isaac Franco Fernandes
 create-user isaacfranco@imd.ufrn.br senhalegal Isaac Franco Fernandes
 create-user renan@imd.ufrn.br senha Renan
 create-user julio@imd.ufrn.br senha Julio
@@ -44,11 +44,20 @@ enter-server 1 servidor-bacana
 list-participants 1
 login renan@imd.ufrn.br senha
 create-server 2 servidor-sinistro
+create-server 3 servidor-sinistro
 enter-server 2 servidor-sinistro
 login julio@imd.ufrn.br senha
 enter-server 3 servidor-sinistro
 login isaacfranco@imd.ufrn.br senhalegal
 enter-server 1 servidor-sinistro
 list-participants 1
+create-channel 1 sugestões
+enter-channel 2 sugestões
+enter-channel 3 sugestões
+send-message 1 Será que os alunos curtiriam ter uma disponibilidade maior de tipos de projetos?
+send-message 2 Acredito que sim, seria uma forma de incentivar os alunos a resolverem problemas com o qual eles se identifiquem e tenham interesse. 
+send-message 3 Isso vai dar um trabalhão
+send-message 2 Verdade, mas em um modelo de ensino em que os alunos estão tendo que aprender tudo duas vezes mais rápido é bom tentar deixar a disciplina empolgante pra eles. Afinal, não é sobre isso a programação?
+list-messages 1
 quit
 create-user naodeveprocessar@imd.ufrn.br naodevechegaraqui Não deve chegar aqui
