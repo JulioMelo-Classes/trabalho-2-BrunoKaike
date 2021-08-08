@@ -198,7 +198,7 @@ Teste 1 (Fornecido pelo professor)
 
 ```
 
-<p>Não foi possível interagir com o servidor (Usuário não está logado)</p>
+<p>Não foi possível deslogar (Usuário não está logado)</p>
 
 ```console
 ./concordo < ../data/error/teste6.txt
