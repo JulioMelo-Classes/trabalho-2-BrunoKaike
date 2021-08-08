@@ -1,0 +1,7 @@
+create-user julio.melo@imd.ufrn.br 12ab34cd Julio Melo
+login julio.melo@imd.ufrn.br 12ab34cd
+create-server 1 minha-casa
+create-server 1 minha-escola
+create-server 1 minha-bolsa
+list-servers 1
+quit

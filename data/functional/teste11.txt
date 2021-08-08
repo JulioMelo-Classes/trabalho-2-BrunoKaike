@@ -1,0 +1,8 @@
+create-user julio.melo@imd.ufrn.br 12ab34cd Julio Melo
+login julio.melo@imd.ufrn.br 12ab34cd
+create-server 1 minha-casa
+set-server-invite-code 1 minha-casa 1234
+create-user bruno@imd.ufrn.br 12ab34dc Bruno Kaike
+login bruno@imd.ufrn.br 12ab34dc
+enter-server 2 minha-casa 1234
+quit

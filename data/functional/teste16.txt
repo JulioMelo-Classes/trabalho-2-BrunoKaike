@@ -1,0 +1,9 @@
+create-user julio.melo@imd.ufrn.br 12ab34cd Julio Melo
+login julio.melo@imd.ufrn.br 12ab34cd
+create-server 1 minha-casa
+create-channel 1 casa-de-mae-joana 
+create-user teste@imd.ufrn.br 12ab34cd Teste
+login teste@imd.ufrn.br 12ab34cd
+enter-server 2 minha-casa
+enter-channel 2 casa-de-mae-joana
+quit

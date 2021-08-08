@@ -1,0 +1,6 @@
+//mudar-descrição
+create-user julio.melo@imd.ufrn.br 12ab34cd Julio Melo
+login julio.melo@imd.ufrn.br 12ab34cd
+create-server 1 minha-casa
+set-server-desc 1 minha-casa "Este servidor serve como minha casa, sempre estarei nele"
+quit

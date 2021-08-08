@@ -1,0 +1,14 @@
+create-user bruno@imd.ufrn.br 12ab34cd Bruno Kaike
+login bruno@imd.ufrn.br 12ab34cd
+create-server 1 minha-escola
+create-channel 1 sala-de-conversa
+create-user anny@imd.ufrn.br 12ab34cd Anny
+login anny@imd.ufrn.br 12ab34cd
+send-message 1 Oi pessoal querem TC?
+send-message 1 Ninguém?
+enter-server 2 minha-escola
+enter-channel 2 sala-de-conversa
+send-message 2 Oi,bruno! você ouviu o novo albúm do Terno Rei?
+send-message 1 Ouvi sim, tá muito massa!
+list-messages 1
+quit

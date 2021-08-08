@@ -1,0 +1,11 @@
+create-user julio.melo@imd.ufrn.br 12ab34cd Julio Melo
+login julio.melo@imd.ufrn.br 12ab34cd
+create-server 1 minha-casa
+create-user bruno@imd.ufrn.br 12ab34dc Bruno Kaike
+login bruno@imd.ufrn.br 12ab34dc
+enter-server 2 minha-casa
+create-user leo@imd.ufrn.br 12ab34dcd Leonardo
+login leo@imd.ufrn.br 12ab34dcd
+enter-server 3 minha-casa
+list-participants 1
+quit
