@@ -144,7 +144,7 @@ string Sistema::set_server_invite_code(int id, const string nome, const string c
 
       }
 
-    } else if(resposta == 0) {
+    } else if(resposta == -2) {
 
       return "\033[1;31mServidor \""+ nome +"\" não existe\033[0m";
 
@@ -278,7 +278,7 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
 
       }
 
-    } else if(resposta == -2) {
+    } else if(resposta == -1) {
 
       return "\033[1;31mServidor \""+ nome +"\" não existe\033[0m";
 
@@ -606,8 +606,7 @@ bool Sistema::check_duplicates_user(const std::string nome, const std::string em
 
   for(int x = 0; x < this->usuarios.size(); x++){
 
-    if(this->usuarios[x].getNome()==nome && this->usuarios[x].getEmail()==email && this->usuarios[x].getSenha()==senha){
-
+    if(this->usuarios[x].getNome()==nome ){
       return true;
 
     }
