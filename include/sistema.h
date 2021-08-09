@@ -25,67 +25,67 @@ class Sistema {
 		*/
 		std::string quit();
 
-    /*! Cria e formata uma string contendo a data e hora atual
+		/*! Cria e formata uma string contendo a data e hora atual
 				@return uma string contendo a data e hora atual de acordo com o TimeZone doa máquina.
 		*/
-    std::string currentDateTime();
+		std::string currentDateTime();
 
-    /*! Verifica se um determinado usuário está participando de algum servidor e retorna sua posição no vetor de usuários.
+		/*! Verifica se um determinado usuário está participando de algum servidor e retorna sua posição no vetor de usuários.
 				@param id o id do usuário informado no comando leave-server.
 				@return um int com a posição do usuário encontrado no vetor, sendo -1 um valor que representa que o usuário não está participando de nenhum servidor.
 		*/
-    int userOnAServer(int id);
+		int userOnAServer(int id);
 
-    /*! Retorna uma string contendo todos os canais de texto de um servidor que está sendo visualizado por um determinado usuário.
+		/*! Retorna uma string contendo todos os canais de texto de um servidor que está sendo visualizado por um determinado usuário.
 				@param id o id do usuário informado no comando list-channels.
 				@return uma string contendo todos os canais de texto encontrados no servidor.
 		*/
-    std::string list_channels_by_id_viewer(int id);
+		std::string list_channels_by_id_viewer(int id);
 
-    /*! Remove o estado de visualização dos usuários que estão visualizando um servidor que irá ser removido
+		/*! Remove o estado de visualização dos usuários que estão visualizando um servidor que irá ser removido
 				@param nome o nome do servidor informado no comando remove-server.
 		*/
-    void remove_users_from_server_view(std::string nome);
+		void remove_users_from_server_view(std::string nome);
 
-    /*! Verifica se um determinado id de dono correspondem a algum servidor retornando o nome de todos os servidores encontrados.
+		/*! Verifica se um determinado id de dono correspondem a algum servidor retornando o nome de todos os servidores encontrados.
 				@param idDono o id do dono informado no comando list-servers.
 				@return uma string contendo todos os servidores encontrados para um determinado id de usuário.
 		*/
-    std::string list_servers_by_id_owner(int id);
+		std::string list_servers_by_id_owner(int id);
 
-    /*! Verifica se um determinado id de dono e nome correspondem a algum servidor cadastrado retornando true/false.
+		/*! Verifica se um determinado id de dono e nome correspondem a algum servidor cadastrado retornando true/false.
 				@param idDono o id do dono informado no comando set-server-desc.
 				@param nome o nome do servidor passado ao comando set-server-desc.
 				@return um int com a posição do servidor encontrado no vetor, sendo -2 um valor que representa servidor não encontrado e -1 que o id fornecido não é dono do servidor.
 		*/
-    int is_registered_user_id(int id);
+		int is_registered_user_id(int id);
 
-    /*! Verifica se um determinado id corresponde a algum usuario cadastrado e retorna a posição do usuário no vetor usuarios.
+		/*! Verifica se um determinado id corresponde a algum usuario cadastrado e retorna a posição do usuário no vetor usuarios.
 				@param id o id do usuário informado no comando disconnect.
 				@return um int com a posição do usuário encontrado no vetor, sendo -1 um valor inválido.
 		*/
-    int is_registered_server(int id, const std::string nome);
+		int is_registered_server(int id, const std::string nome);
 
-    /*! Verifica se um determinado email e senha correspondem a alguma conta cadastrada retornando a posição do usuário no vetor usuarios
+		/*! Verifica se um determinado email e senha correspondem a alguma conta cadastrada retornando a posição do usuário no vetor usuarios
 				@param email o email do usuário informado no comando login.
 				@param senha a senha passada ao comando login.
 				@return um int com a posição do usuário encontrado no vetor, sendo -1 um valor inválido.
 		*/
-    int is_registered_user(const std::string email, const std::string senha);
+		int is_registered_user(const std::string email, const std::string senha);
 
-    /*! Verifica se um determinado usuário já está cadastrado retornando true/false
-        @param email o email do usuário informado no comando create-user.
+		/*! Verifica se um determinado usuário já está cadastrado retornando true/false
+		@param email o email do usuário informado no comando create-user.
 				@param senha a senha passada ao comando create-ser
 				@param nome o nome do usuário (com espaços) passado ao comando create user. 
-        @return um booleano contendo true se foi encontrado cópias.
+				@return um booleano contendo true se foi encontrado cópias.
 		*/
-    bool check_duplicates_user(const std::string nome, const std::string email, const std::string senha);
+		bool check_duplicates_user(const std::string nome, const std::string email, const std::string senha);
 
-    /*! Verifica se um determinado servidor já está cadastrado com o nome digitado pelo usuário retornando true/false.
+		/*! Verifica se um determinado servidor já está cadastrado com o nome digitado pelo usuário retornando true/false.
 				@param nome o nome do servidor dado no comando create-server.
 				@return um booleano contendo true se foi encontrado cópias.
 		*/
-    int check_duplicates_server(const std::string nome);
+		int check_duplicates_server(const std::string nome);
 
 		/*! Cria um usuário e retorna uma string de erro/sucesso 
 				@param email o email do usuário informado no comando create-user.
