@@ -47,12 +47,26 @@ class Servidor{
 
     // operations
 
-    int check_duplicates_chanel(std::string);
+    /*! Verifica se um canal está cadastrado em um servidor e retorna sua posição no vetor de canais de texto.
+    		@param nome uma string contendo o nome do canal informado.
+    		@return um int com a posição do canal encontrado no vetor, sendo -1 um valor inválido.
+    */
+    int check_duplicates_chanel(std::string nome);
 
+    /*! Verifica se um usuário está participando de um servidor e retorna sua posição no vetor de participantes.
+    		@param id um int contendo o id de usuário informado.
+    		@return um int com a posição do usuário encontrado no vetor, sendo -1 um valor inválido.
+    */
     int check_duplicates_participant(int id);
-
+	
+    /*! Percorre o vetor de participantes de um servidor e verifica se um usuário está participando do mesmo, caso esteja ele é removido do vetor.
+    		@param id um int contendo o id de usuário informado.
+    */
     void remove_participant(int id);
 
+    /*! Chama a função addMensagens() do objeto canal de texto e envia o id do canal recebido por parâmetro.
+    		@param id um int contendo o id do canal informado no vetor de canais de texto do servidor.
+    */	
     void addMensagens(int id, Mensagem s);
 
     //toStrings
