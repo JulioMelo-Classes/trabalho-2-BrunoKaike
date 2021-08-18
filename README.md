@@ -1,5 +1,9 @@
 # Concordo
-
+<!--voce fez uma quantidade consdirável de testes, vou considerar 100% deste quesito apenas por isso, mas mesmo os testes
+que geram "erro" estejam na pasta "erro" ainda fica dificil identificar qual parte do software está realmente sendo testada
+da próxima vez, sugiro que coloque uma descrição separada dos casos de teste, vc pode até escrever menos casos, mas 
+parar um pouco para descrevê-los =)
+-->
 Concordo é um projeto simplificado do Discord baseado na entrada de dados pelo console ou arquivos de texto.
 
 ## Objetivos

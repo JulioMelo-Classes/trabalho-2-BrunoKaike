@@ -4,6 +4,11 @@
 #include "../include/canaltexto.h"
 #include "../include/usuario.h"
 
+/*
+Ok
+
+Documentação 0 - Faltou a documentação!
+*/
 class Servidor{
 	/*
 		TODO implementação dos atributos e métodos

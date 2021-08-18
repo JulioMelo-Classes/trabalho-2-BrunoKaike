@@ -214,6 +214,9 @@ string Sistema::remove_server(int id, const string nome) {
   
 }
 
+/*
+A2.7 ok
+*/
 string Sistema::enter_server(int id, const string nome, const string codigo) {
   
   auto find = this->usuariosLogados.find(id);
@@ -292,6 +295,9 @@ string Sistema::enter_server(int id, const string nome, const string codigo) {
 
 }
 
+/*
+A2.8 ok
+*/
 string Sistema::leave_server(int id, const string nome) {
   
   auto find = this->usuariosLogados.find(id);
@@ -328,6 +334,9 @@ string Sistema::leave_server(int id, const string nome) {
 
 }
 
+/*
+A2.9 ok
+*/
 string Sistema::list_participants(int id) {
 
   auto find = this->usuariosLogados.find(id);
@@ -354,6 +363,9 @@ string Sistema::list_participants(int id) {
 
 }
 
+/*
+B1.1 ok
+*/
 string Sistema::list_channels(int id) {
 
   if(this->list_channels_by_id_viewer(id) != ""){
@@ -366,6 +378,9 @@ string Sistema::list_channels(int id) {
   
 }
 
+/*
+B1.2 ok
+*/
 string Sistema::create_channel(int id, const string nome) {
 
   auto find = this->usuariosLogados.find(id);
@@ -401,6 +416,9 @@ string Sistema::create_channel(int id, const string nome) {
 
 }
 
+/*
+B1.3 ok
+*/
 string Sistema::enter_channel(int id, const string nome) {
   auto find = this->usuariosLogados.find(id);
 
@@ -434,6 +452,9 @@ string Sistema::enter_channel(int id, const string nome) {
 
 }
 
+/*
+B1.4 ok
+*/
 string Sistema::leave_channel(int id) {
 
   auto find = this->usuariosLogados.find(id);
@@ -469,6 +490,9 @@ string Sistema::leave_channel(int id) {
 
 }
 
+/*
+B2.1 ok
+*/
 string Sistema::send_message(int id, const string mensagem) {
 
   auto find = this->usuariosLogados.find(id);
@@ -506,6 +530,9 @@ string Sistema::send_message(int id, const string mensagem) {
   
 }
 
+/*
+B2.2 ok
+*/
 string Sistema::list_messages(int id) {
 
   auto find = this->usuariosLogados.find(id);

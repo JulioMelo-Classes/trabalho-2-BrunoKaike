@@ -3,6 +3,11 @@
 
 #include <string>
 
+/*
+Ok
+
+Documentação 0 - Faltou a documentação!
+*/
 class Mensagem{
 	/*
 		TODO implementação dos atributos e métodos
